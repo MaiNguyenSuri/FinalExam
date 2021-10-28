@@ -12,6 +12,10 @@ public class BaiTap {
 
     private List<Student> lstStudent = new ArrayList<>();
 
+    public List<Student> getLstStudent() {
+        return lstStudent;
+    }
+
     public void readData(String fileName) throws Exception {
         URL resource = getClass().getClassLoader().getResource(fileName);
         File file = new File(resource.toURI());

@@ -1,6 +1,8 @@
 package Models;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private String id;
     private String name;
     private String email;
@@ -92,6 +94,29 @@ public class Student {
         str.append("\nName: " + this.name);
         str.append("\nEmail: " + this.email);
         str.append("\nTK: " + diemTongKet());
+
+        return str.toString();
+    }
+
+    public String printNameEmail(){
+        StringBuilder str = new StringBuilder();
+        str.append("Id: " + this.id);
+        str.append("\nName: " + this.name);
+        str.append("\nEmail: " + this.email);
+
+        return str.toString();
+    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        str.append("Id: " + this.id);
+        str.append("\nName: " + this.name);
+        str.append("\nEmail: " + this.email);
+        str.append("\nBonus: " + this.bonus);
+        str.append("\nReport: " + this.report);
+        str.append("\nApp: " + this.app);
+        str.append("\nLT: " + this.lt);
+        str.append("\nTK: " + this.getTk());
 
         return str.toString();
     }
