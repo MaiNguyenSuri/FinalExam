@@ -74,7 +74,7 @@ public class BaiTap {
         System.out.println("\n\n\n");
     }
 
-    public String escapeSpecialCharacters(String data) {
+    private String escapeSpecialCharacters(String data) {
         String escapedData = data.replaceAll("\\R", " ");
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {
             data = data.replace("\"", "\"\"");
@@ -83,7 +83,7 @@ public class BaiTap {
         return escapedData;
     }
 
-    public String convertToCSV(String[] data) {
+    private String convertToCSV(String[] data) {
         return Stream.of(data)
                 .map(this::escapeSpecialCharacters)
                 .collect(Collectors.joining(","));
