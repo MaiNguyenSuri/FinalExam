@@ -101,7 +101,7 @@ public class Student {
                 + (this.report * 30/100)
                 + (this.app * 15/100)
                 + (this.lt * 45/100);
-        this.tk = Math.round(this.tk * 100.0f) / 100.0f;
+        this.tk = Math.round(this.tk * 10.0f) / 10.0f;
         return this.tk;
     }
 

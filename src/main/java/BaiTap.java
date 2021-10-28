@@ -12,7 +12,7 @@ public class BaiTap {
 
     private List<Student> lstStudent = new ArrayList<>();
 
-    public void readData(String fileName) throws IOException, URISyntaxException {
+    public void readData(String fileName) throws Exception {
         URL resource = getClass().getClassLoader().getResource(fileName);
         File file = new File(resource.toURI());
         BufferedReader csvReader = new BufferedReader(new FileReader(file));
@@ -24,9 +24,9 @@ public class BaiTap {
             {
                 Student student = new Student();
                 String[] data = row.split(",");
-                student.setId((String)data[0]);
-                student.setName((String)data[1]);
-                student.setEmail((String)data[2]);
+                student.setId(data[0]);
+                student.setName(data[1]);
+                student.setEmail(data[2]);
                 student.setBonus(Integer.valueOf(data[3]));
                 student.setReport(Integer.valueOf(data[4]));
                 student.setApp(Integer.valueOf(data[5]));
@@ -43,7 +43,7 @@ public class BaiTap {
             s2.getLt().compareTo(s1.getLt())
         );
         int size = lstStudent.size();
-        int total = size > max ? max : size;
+        int total = Math.min(size, max);
 
         System.out.println("------------ Dang sach 10 SV diem LT cao nhat ------------ ");
         for(int i = 0; i < total; i++){
@@ -59,7 +59,7 @@ public class BaiTap {
                 s1.getTk().compareTo(s2.getTk())
         );
         int size = lstStudent.size();
-        int total = size > 10 ? 10 : size;
+        int total = Math.min(size, max);
 
         System.out.println("------------ Dang sach 10 SV diem TK thap nhat ------------ ");
         for(int i = 0; i < total; i++){
@@ -106,26 +106,26 @@ public class BaiTap {
     }
 
     private float roundDigit(float value){
-        return Math.round(value * 100.0f) / 100.0f;
+        return Math.round(value * 10.0f) / 10.0f;
     }
 
     public void printThongKe(){
         int totalSV = lstStudent.size();
 
         long totalPass = countPass();
-        float percentPass = roundDigit(totalPass * 100 / totalSV);
+        float percentPass = totalSV > 0 ? roundDigit(totalPass * 100f / totalSV) : 0f;
 
         long totalFail = countFail();
-        float percentFail = roundDigit(totalFail * 100 / totalSV);
+        float percentFail = totalSV > 0 ? roundDigit(totalFail * 100f / totalSV) : 0f;
 
         long totalGood = countGood();
-        float percentGood = roundDigit(totalGood * 100 / totalSV);
+        float percentGood = totalSV > 0 ? roundDigit(totalGood * 100f / totalSV) : 0f;
 
         long totalFair = countFair();
-        float percentFair = roundDigit(totalFair * 100 / totalSV);
+        float percentFair = totalSV > 0 ? roundDigit(totalFair * 100f / totalSV) : 0f;
 
         long totalNormal = countNormal();
-        float percentNormal = roundDigit(totalNormal * 100 / totalSV);
+        float percentNormal = totalSV > 0 ? roundDigit(totalNormal * 100f / totalSV) : 0f;
 
         System.out.println("Số lượng sinh viên: " + totalSV);
         System.out.println("Đạt (điểm tổng kết > 4.5): " + totalPass + "      tỉ lệ: " + percentPass + "%");
